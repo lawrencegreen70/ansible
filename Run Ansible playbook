@@ -1,0 +1,3 @@
+Cd to /home/ec2-user or where ever playbook is saved
+
+Run Ansible-playbook <playbook name>
