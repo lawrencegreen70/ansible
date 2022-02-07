@@ -1,5 +1,5 @@
 #Ansible-playbook start EC2 instances
-- name: Stop EC2 Ansible Slave1 & Slave2 instances
+- name: Start EC2 Ansible Slave1 & Slave2 instances
   hosts: localhost
   connection: local
   gather_facts: True
@@ -9,7 +9,7 @@
       - 'i-044fc48b815632685'
     region: us-east-2
   tasks:
-    - name: Stop EC2 Ansible Slave1 & Slave2 instances
+    - name: Start EC2 Ansible Slave1 & Slave2 instances
       amazon.aws.ec2:
         aws_access_key: 'AKIAXY2RYNS36F32ILWZ'
         aws_secret_key: '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'
