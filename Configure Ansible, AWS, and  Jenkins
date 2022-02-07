@@ -1,7 +1,7 @@
 Note: If webpage doesn’t load, check security group in AWS instance.
 
 1. Setup configuration between the servers for Ansible
-    1. Followed step 3 (config…) & 4 (seting up…) under Ansible with AWS file
+    1. Complete steps found in "Configure Ansible and AWS" file
     
 2. Create  playbook to install Jenkins 
     1. *Ensure can run commands by putting target servers in the playbooks.  Can follow step 3 to have an inventory that can run in commands.
@@ -17,17 +17,3 @@ Note: If webpage doesn’t load, check security group in AWS instance.
 4. Run playbook using the inventory that was created
     1. Run “ansible-playbook install-jenkins.yml -i inventory.txt”
     2. !!!!!!!Failing to install Jenkins
-
-#website 
-http://<private ip address>:8080
-http://18.222.181.166:8080/
-http://18.222.96.67:8080/
-
-
-1. Create inventory so that you do not have to put list of servers inside each playbook
-    1. *Note inventory does not work when running ping tests
-    2. Vi inventory.txt
-        1. Put target hosts into inventory file like below
-            1. target ansible_host=<target private ip>
-            2. Ex:target ansible_host=172.31.40.80
-				target ansible_host=172.31.37.89
