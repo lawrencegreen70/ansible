@@ -1,0 +1,6 @@
+#website 
+http://<private ip address of host that jenkins is running on>:8080
+
+Ex:
+  http://18.222.181.166:8080/
+  http://18.222.96.67:8080/
