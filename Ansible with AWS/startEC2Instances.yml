@@ -1,1 +1,21 @@
-
+#Ansible-playbook start EC2 instances
+- name: Stop EC2 Ansible Slave1 & Slave2 instances
+  hosts: localhost
+  connection: local
+  gather_facts: True
+  vars:
+    instance_ids:
+      - 'i-04562a7b95b013071'
+      - 'i-044fc48b815632685'
+    region: us-east-2
+  tasks:
+    - name: Stop EC2 Ansible Slave1 & Slave2 instances
+      amazon.aws.ec2:
+        aws_access_key: 'AKIAXY2RYNS36F32ILWZ'
+        aws_secret_key: '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'
+        instance_ids: '{{ instance_ids }}'
+        region: '{{ region }}'
+        state: running
+        wait: True
+        vpc_subnet_id: subnet-049913110533447fb
+        assign_public_ip: yes
