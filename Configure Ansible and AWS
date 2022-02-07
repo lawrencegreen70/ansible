@@ -1,4 +1,4 @@
-Step 1 - Create 2 EC2 instances (Master and slave)
+Step 1 - Create 2 EC2 instances (Controller and other hosts)
 *Pre req - Need to have keys setup. 
 1. Go to EC2 -> instance 
 2. Create a instances 
@@ -7,46 +7,46 @@ Step 1 - Create 2 EC2 instances (Master and slave)
         2. Under subnet - Select the region that you want to work out of.  Ex N Virginia or Ohio
         
         
-Step 2 - Install Ansible on master & (boto, boto3, & python) on master and slaves
+Step 2 - Install Ansible on Controller & (boto, boto3, & python) on master and other hosts
 1. Find ssh command for instance 
     1. Login go to EC2 instances
     2. Check the master and click connect button 
         1. Find the ssh command and copy in terminal (in path where AnsibleKeyPaire.pem is located).
 2. Install python
     1. sudo dnf install python3
-3. Install boto, boto3 & Ansible on Master instance 
+3. Install boto, boto3 & Ansible on Controller instance 
     1.  Run “sudo pip3 install boto boto3 ansible”
-4. Install both then boto3 on slave instances
+4. Install both then boto3 on other hosts instances
     1. Run “sudo pip3 install boto boto3”
     
     
-Step 3 - Configure ssh access to Ansible slave hosts (EC2 instances) from Ansible master host
+Step 3 - Configure ssh access to Ansible other hosts (EC2 instances) from Ansible master host
 1. Login go to EC2 instances
-2. Check the master and click connect button 
+2. Check the Controller and click connect button 
     1. Find the ssh command and copy in terminal (in path where AnsibleKeyPaire.pem is located).
 3. Check the slave.  Look down and copy the private IP address to use in the below command.
     1. Ex: ssh ec2-user@ip-172-31-40-80
     2. If you get permissions denied follow the below steps.
         1. Enable keyless access
-            1. On master 
+            1. On Controller 
                 1. Cd /home/ec2-user/.ssh
                 2. Run “ssh-keygen”
                     1. Keep hitting enter
                 3. Run “cat id_rsa.pub”
-                4. Copy command to paste in slaves /home/ec2-user/.ssh/authorized_keys file
+                4. Copy command to paste in other hosts /home/ec2-user/.ssh/authorized_keys file
             2. On slaves
                 1. Cd /home/ec2-user/.ssh
                 2. Run “vi authorized_keys”
                     1. Paste id_rsa.pub data and save.
-            3. Go back to master
+            3. Go back to Controller
                 1. Run “ssh <user>@<slave’s private IP address>
                     1. Should be able to see on the first part of each line found in command line terminal
                     2. Ex: ssh ec2-user@172.31.15.191
     
     
-Step 4 - Setting up Ansible hosts and testing connections 
+Step 4 - Setting up Ansible other hosts and testing connections 
 1. Add hosts for Ansible to talk to 
-    1. On master create a ansible config file
+    1. On Controller create a ansible config file
         1. Sudo mkdir /etc/ansible 
         2. sudo vi /etc/ansible/hosts
     2. Then enter below
