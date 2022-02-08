@@ -27,8 +27,8 @@
 
     - name: Terminate the 3 new instances
       amazon.aws.ec2:
-        aws_access_key: 'AKIAXY2RYNS36F32ILWZ'
-        aws_secret_key: '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'
+        aws_access_key: '<access key>'
+        aws_secret_key: '<secrete key>'
         region: us-east-2
         state: 'absent'
           #state: 'absent'
