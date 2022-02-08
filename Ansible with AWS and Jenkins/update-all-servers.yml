@@ -1,0 +1,40 @@
+---
+- hosts: all
+  become: yes
+  remote_user: ec2-user
+  become_user: root
+  tasks:
+  - name: Download Jenkins release
+    get_url:
+      url: https://pkg.jenkins.io/redhat-stable/jenkins.repo
+      dest: /etc/yum.repos.d/jenkins.repo
+
+  - name: Import jenkins key from url
+    ansible.builtin.rpm_key:
+      state: present
+      key: https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
+  - name: yum update
+    yum:
+      name: '*'
+      state: latest
+
+  - name: Install dnf
+    command: sudo dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+
+  - name: Install java
+    yum:
+      name: java-11-openjdk-devel
+      state: present
+ 
+  - name: Install daemonize
+    yum:
+      name: daemonize
+      state: present
+
+  - name: daemon-reload to pick up config changes
+    ansible.builtin.systemd:
+      daemon_reload: yes
+
+  - name: Install python-jenkins using pip3
+    command: sudo pip3 install python-jenkins
