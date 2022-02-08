@@ -1,0 +1,12 @@
+path: /etc/ansible/hosts
+
+command to change servers configuration:
+sudo vi /etc/ansible/hosts
+
+
+Group & server list
+*List does not automatically update
+[jenkins]
+master ansible_ssh_host=172.31.13.253
+slave1 ansible_ssh_host=172.31.40.80
+slave2 ansible_ssh_host=172.31.36.115
