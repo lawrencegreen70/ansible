@@ -1,0 +1,20 @@
+---
+- hosts: master 
+  become: yes
+  remote_user: ec2-user
+  become_user: root
+
+  vars:
+    url: 'http://3.145.2.158:8080'
+    file_name: "{{ url | basename }}"
+    username: 'lawrence2032'
+    password: '7777777'
+
+  tasks:
+  - name: Create a jenkins job 
+    community.general.jenkins_job:
+      url: "{{url}}"     
+      user: "{{username}}"
+      password: "{{password}}"
+      name: test
+      config: "{{ lookup('file', 'jenkins-job-template.xml') }}"
