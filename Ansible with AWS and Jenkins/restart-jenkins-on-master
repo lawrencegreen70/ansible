@@ -1,0 +1,15 @@
+---
+- hosts: mster 
+  become: yes
+  remote_user: ec2-user
+  become_user: root
+  tasks:
+  - name: Stop jenkins
+    ansible.builtin.systemd:
+      name: jenkins
+      state: stopped
+                       
+  - name: Start jenkins
+    ansible.builtin.systemd:
+      name: jenkins
+      state: started
